@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca - Frontend API</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Jogo da Forca via API</h1>
+
+        <section id="setup-section">
+            <h2>1. Configurar Jogador</h2>
+            <input type="text" id="player-name" placeholder="Seu nome">
+            <button onclick="createOrLoadPlayer()">Entrar / Criar Jogador</button>
+            <p id="player-status"></p>
+
+            <button id="start-button" onclick="startGame()" disabled>Iniciar Nova Partida</button>
+        </section>
+
+        <hr>
+
+        <section id="game-section" style="display: none;">
+            <h2>2. Partida em Andamento</h2>
+            <p><strong>Partida ID:</strong> <span id="game-id-display"></span></p>
+            <p><strong>Jogador:</strong> <span id="current-player-name"></span></p>
+
+            <div id="hangman-figure">
+                <pre id="figure-display">
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+                </pre>
+            </div>
+
+            <h1 id="masked-word" class="word"></h1>
+
+            <div id="guess-control">
+                <input type="text" id="guess-input" maxlength="1" placeholder="Digite uma letra">
+                <button onclick="makeGuess()">Tentar Letra</button>
+            </div>
+
+            <p id="message" class="status-message"></p>
+            <p>Tentativas Restantes: <span id="attempts-left"></span></p>
+            <p>Letras já Tentadas: <span id="tried-letters">Nenhuma</span></p>
+        </section>
+
+        <section id="scoreboard-section">
+            <h2>3. Placar de Jogadores</h2>
+            <button onclick="loadScoreboard()">Atualizar Placar</button>
+            <ul id="scoreboard-list">
+                </ul>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
