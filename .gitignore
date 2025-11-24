@@ -1,0 +1,22 @@
+# Arquivos e Diretórios de Ambiente
+.env
+.venv
+venv/
+env/
+
+# Arquivos Gerados pelo Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+.mypy_cache/
+.pytest_cache/
+
+# Arquivos Gerados pelo Banco de Dados (SQLite)
+hangman_game.db
+*.sqlite
+*.db
+
+# Arquivos Gerados pelo IDE (PyCharm)
+.idea/
