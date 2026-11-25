@@ -17,12 +17,14 @@ MAX_ATTEMPTS = 6
 
 
 def get_masked_word(word: str, guessed_letters: str) -> str:
+    """Oculta as letras ainda não tentadas, preservando as já descobertas."""
     return "".join(
         letter if letter in guessed_letters else "_" for letter in word
     )
 
 
 def start_game(db: Session, player_id: int) -> Game:
+    """Valida o jogador e persiste uma nova partida com palavra aleatória."""
     if not repositories.player_repository.get_by_id(db, player_id):
         raise PlayerNotFound
 
@@ -36,6 +38,7 @@ def start_game(db: Session, player_id: int) -> Game:
 
 
 def get_game(db: Session, game_id: int) -> Game:
+    """Retorna uma partida existente ou sinaliza que ela não foi encontrada."""
     game = repositories.game_repository.get_by_id(db, game_id)
     if game is None:
         raise GameNotFound
@@ -43,6 +46,10 @@ def get_game(db: Session, game_id: int) -> Game:
 
 
 def make_guess(db: Session, game_id: int, letter: str):
+    """Valida e aplica uma tentativa, atualiza o estado e persiste a partida.
+
+    Retorna a partida atualizada e um booleano que indica se a letra acertou.
+    """
     game = get_game(db, game_id)
     if game.status != "IN_PROGRESS":
         raise GameAlreadyFinished(game.status)
