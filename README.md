@@ -9,6 +9,18 @@
 * **Banco de Dados (Persistência):** SQLite (utilizando SQLAlchemy ORM)
 * **Servidor:** Uvicorn
 
+## 🖥️ Frontend
+
+O frontend é uma página estática feita com HTML, CSS e JavaScript, localizada em `frontend/`. Não precisa de npm, instalação de pacotes nem etapa de build. Ele envia as requisições para a API em `http://127.0.0.1:8000`.
+
+Com a API em execução, abra outro terminal na raiz do projeto e inicie o servidor local do frontend:
+
+```powershell
+py -m http.server 5501 --directory frontend
+```
+
+Mantenha os dois terminais abertos e acesse <http://127.0.0.1:5501> no navegador. Se a porta `5501` já estiver ocupada, encerre o processo anterior com `Ctrl+C` ou escolha outra porta livre no comando e na URL.
+
 ## 🛠️ Instruções Claras de Como Rodar o Projeto
 
 ### Pré-requisitos
