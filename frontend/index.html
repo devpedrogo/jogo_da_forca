@@ -3,59 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo da Forca - Frontend API</title>
+    <meta name="theme-color" content="#10131f">
+    <title>Forca! — Jogo de palavras</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🎮 Jogo da Forca via API</h1>
-
-        <section id="setup-section">
-            <h2>1. Configurar Jogador</h2>
-            <input type="text" id="player-name" placeholder="Seu nome">
-            <button onclick="createOrLoadPlayer()">Entrar / Criar Jogador</button>
-            <p id="player-status"></p>
-
-            <button id="start-button" onclick="startGame()" disabled>Iniciar Nova Partida</button>
-        </section>
-
-        <hr>
-
-        <section id="game-section" style="display: none;">
-            <h2>2. Partida em Andamento</h2>
-            <p><strong>Partida ID:</strong> <span id="game-id-display"></span></p>
-            <p><strong>Jogador:</strong> <span id="current-player-name"></span></p>
-
-            <div id="hangman-figure">
-                <pre id="figure-display">
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-                </pre>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-mark" aria-hidden="true">F</div>
+                <div>
+                    <p class="brand-kicker">ARCADE DE PALAVRAS</p>
+                    <h1>Forca<span>!</span></h1>
+                </div>
             </div>
-
-            <h1 id="masked-word" class="word"></h1>
-
-            <div id="guess-control">
-                <input type="text" id="guess-input" maxlength="1" placeholder="Digite uma letra">
-                <button onclick="makeGuess()">Tentar Letra</button>
+            <div class="topbar-label">
+                <span class="status-dot" aria-hidden="true"></span>
+                JOGO DA FORCA
             </div>
+        </header>
 
-            <p id="message" class="status-message"></p>
-            <p>Tentativas Restantes: <span id="attempts-left"></span></p>
-            <p>Letras já Tentadas: <span id="tried-letters">Nenhuma</span></p>
-        </section>
+        <main class="dashboard">
+            <section id="game-section" class="panel game-panel" aria-label="Partida">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">SUA PARTIDA</p>
+                        <h2>Descubra a palavra</h2>
+                    </div>
+                    <div class="game-id-pill">
+                        <span>JOGO</span>
+                        <strong id="game-id-display">—</strong>
+                    </div>
+                </div>
 
-        <section id="scoreboard-section">
-            <h2>3. Placar de Jogadores</h2>
-            <button onclick="loadScoreboard()">Atualizar Placar</button>
-            <ul id="scoreboard-list">
-                </ul>
-        </section>
+                <div id="game-empty" class="game-empty">
+                    <div class="empty-art" aria-hidden="true">
+                        <span class="empty-rope"></span>
+                        <span class="empty-head"></span>
+                        <span class="empty-body"></span>
+                        <span class="empty-arm empty-arm-left"></span>
+                        <span class="empty-arm empty-arm-right"></span>
+                        <span class="empty-leg empty-leg-left"></span>
+                        <span class="empty-leg empty-leg-right"></span>
+                        <span class="empty-base"></span>
+                    </div>
+                    <p class="eyebrow">PRONTO PARA JOGAR?</p>
+                    <h3>Uma palavra está à sua espera.</h3>
+                    <p>Entre com seu nome ao lado e inicie uma nova partida.</p>
+                </div>
+
+                <div id="game-content" class="game-content" style="display: none;">
+                    <div class="hangman-stage">
+                        <div class="stage-label">
+                            <span class="eyebrow">FORCA</span>
+                            <span class="stage-indicator"><span></span> AO VIVO</span>
+                        </div>
+                        <pre id="figure-display" aria-label="Desenho da forca"></pre>
+                        <div class="attempts-card">
+                            <span class="attempts-icon" aria-hidden="true">!</span>
+                            <div>
+                                <span class="eyebrow">TENTATIVAS</span>
+                                <strong id="attempts-left">6</strong>
+                            </div>
+                            <span class="attempts-caption">restantes</span>
+                        </div>
+                    </div>
+
+                    <div class="game-controls">
+                        <div class="word-card">
+                            <p class="eyebrow">PALAVRA SECRETA</p>
+                            <h3 id="masked-word" class="word"></h3>
+                        </div>
+
+                        <p id="message" class="status-message" aria-live="polite"></p>
+
+                        <div id="guess-control" class="guess-control">
+                            <label class="sr-only" for="guess-input">Digite uma letra</label>
+                            <input type="text" id="guess-input" maxlength="1" autocomplete="off" placeholder="?" aria-label="Digite uma letra">
+                            <button type="button" class="button button-primary" onclick="makeGuess()">Tentar letra <span aria-hidden="true">↗</span></button>
+                        </div>
+
+                        <div class="tried-letters">
+                            <span class="eyebrow">LETRAS TENTADAS</span>
+                            <strong id="tried-letters">Nenhuma</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <section id="setup-section" class="panel player-panel">
+                    <div class="section-title">
+                        <div class="section-icon" aria-hidden="true">♟</div>
+                        <div>
+                            <p class="eyebrow">JOGADOR</p>
+                            <h2>Quem vai jogar?</h2>
+                        </div>
+                    </div>
+
+                    <label class="sr-only" for="player-name">Seu nome</label>
+                    <input type="text" id="player-name" placeholder="Digite seu nome" autocomplete="name">
+                    <button type="button" class="button button-secondary" onclick="createOrLoadPlayer()">Entrar ou criar conta</button>
+                    <p id="player-status" class="player-status" aria-live="polite">Seu placar fica salvo para a próxima vez.</p>
+                    <button type="button" id="start-button" class="button button-primary start-button" onclick="startGame()" disabled>
+                        Iniciar nova partida <span aria-hidden="true">→</span>
+                    </button>
+                </section>
+
+                <section id="scoreboard-section" class="panel scoreboard-panel">
+                    <div class="scoreboard-heading">
+                        <div>
+                            <p class="eyebrow">RANKING</p>
+                            <h2>Placar</h2>
+                        </div>
+                        <button type="button" class="refresh-button" onclick="loadScoreboard()" aria-label="Atualizar placar" title="Atualizar placar">↻</button>
+                    </div>
+                    <ul id="scoreboard-list" class="scoreboard-list">
+                        <li class="empty-scoreboard">Carregando placar...</li>
+                    </ul>
+                </section>
+            </aside>
+        </main>
+
+        <footer class="footer">
+            <span>ESCOLHA UMA LETRA. DESCUBRA A PALAVRA.</span>
+            <span>BOA SORTE <span aria-hidden="true">✦</span></span>
+        </footer>
     </div>
 
     <script src="script.js"></script>
