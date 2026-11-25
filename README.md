@@ -28,10 +28,21 @@ pip install -r requirements.txt
 
 ### 3. Executar o Servidor Uvicorn
 ```Bash
-uvicorn app.main:app --reload
+uvicorn api.main:app --reload
 ```
 A API estará rodando em http://127.0.0.1:8000.
 * Documentação da API: Acesse http://127.0.0.1:8000/docs para o Swagger UI interativo.
+
+### Organização do backend
+
+O backend usa camadas para separar responsabilidades:
+
+* `api/routers`: endpoints HTTP e conversão de erros para respostas HTTP.
+* `api/schemas`: contratos de entrada e saída da API.
+* `api/services`: regras do jogo e casos de uso.
+* `api/repositories`: consultas e persistência com SQLAlchemy.
+* `api/models`: entidades/tabelas do banco.
+* `api/core`: configuração e dependência da sessão do banco.
 
 ### 🔗 Exemplos de Requisições e Respostas
 1. Criar Jogador
