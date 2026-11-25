@@ -221,7 +221,8 @@ async function startGame() {
         if (response.ok) {
             const gameStatus = await response.json();
             currentGameId = gameStatus.game_id;
-            document.getElementById('game-section').style.display = 'block';
+            document.getElementById('game-empty').style.display = 'none';
+            document.getElementById('game-content').style.display = 'grid';
             document.getElementById('start-button').disabled = true;
             document.getElementById('guess-control').style.display = 'flex';
             updateGameDisplay(gameStatus, 'Novo jogo iniciado!');
