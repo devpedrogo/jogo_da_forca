@@ -48,7 +48,7 @@ button {
     gap: 18px;
     width: min(1120px, 100%);
     height: min(790px, calc(100dvh - 48px));
-    min-height: 560px;
+    min-height: 0;
 }
 
 .topbar,
@@ -789,15 +789,57 @@ button {
 @media (max-height: 680px) and (min-width: 821px) {
     body {
         padding: 16px;
-        overflow: auto;
+        overflow: hidden;
     }
 
     .app-shell {
-        height: auto;
-        min-height: calc(100dvh - 32px);
+        height: calc(100dvh - 32px);
+        gap: 10px;
     }
 
     .game-panel {
-        min-height: 520px;
+        padding: 14px 18px;
+    }
+
+    .sidebar {
+        gap: 10px;
+    }
+
+    .player-panel,
+    .scoreboard-panel {
+        padding: 14px;
+    }
+
+    .game-content {
+        gap: 16px;
+        padding-top: 10px;
+    }
+
+    .hangman-stage {
+        padding: 10px;
+    }
+
+    #figure-display {
+        min-height: 0;
+        margin: 4px 0 8px;
+        font-size: 13px;
+    }
+
+    .word-card {
+        padding: 12px 10px;
+    }
+
+    .word {
+        min-height: 36px;
+        margin-top: 8px;
+        font-size: clamp(24px, 3vw, 36px);
+    }
+
+    .status-message {
+        margin: 8px 0;
+    }
+
+    .tried-letters {
+        margin-top: 10px;
     }
 }
